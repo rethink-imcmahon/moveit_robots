@@ -4,23 +4,21 @@
   <arg name="right_electric_gripper" default="true"/>
   <arg name="left_electric_gripper" default="true"/>
   <!-- Set the kinematic tips for the left_arm and right_arm move_groups -->
-  <arg name="left_tip_name" default="left_gripper_tip"/>
-  <arg name="right_tip_name" default="right_gripper_tip"/>
+  <arg name="left_tip_name" default="left_gripper"/>
+  <arg name="right_tip_name" default="right_gripper"/>
 
   <!-- By default we do not overwrite the URDF. Change the following to true to change the default behavior -->
   <arg name="load_robot_description" default="false"/>
 
   <!-- Load universal robotic description format (URDF) -->
   <param if="$(arg load_robot_description)" name="robot_description"
-      command="$(find xacro)/xacro.py --inorder $(find baxter_description)/urdf/baxter.urdf.xacro
-          right_end_effector:=$(arg right_end_effector)
-          left_end_effector:=$(arg left_end_effector)"/>
+      command="$(find xacro)/xacro.py --inorder $(find baxter_description)/urdf/baxter.urdf.xacro"/>
 
   <!-- The semantic description that corresponds to the URDF -->
   <param name="robot_description_semantic"
       command="$(find xacro)/xacro.py --inorder $(find baxter_moveit_config)/config/baxter.srdf.xacro
-          left_electric_gripper:=$(arg left_end_effector)
-          right_electric_gripper:=$(arg right_end_effector)
+          left_electric_gripper:=$(arg left_electric_gripper)
+          right_electric_gripper:=$(arg right_electric_gripper)
           left_tip_name:=$(arg left_tip_name)
           right_tip_name:=$(arg right_tip_name)"/>
 
